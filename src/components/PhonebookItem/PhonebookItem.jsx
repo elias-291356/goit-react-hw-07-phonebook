@@ -4,14 +4,14 @@ import React, { useState } from 'react';
 
 export const PhonebookItem = ({ contacts, onAddContact }) => {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setphone] = useState('');
 
   const onInputChange = event => {
     const { name, value } = event.target;
     if (name === 'name') {
       setName(value);
-    } else if (name === 'number') {
-      setNumber(value);
+    } else if (name === 'phone') {
+      setphone(value);
     }
   };
 
@@ -23,14 +23,14 @@ export const PhonebookItem = ({ contacts, onAddContact }) => {
     } else {
       const newContact = {
         name,
-        number,
+        phone,
         id: nanoid(),
       };
 
       onAddContact(newContact);
 
       setName('');
-      setNumber('');
+      setphone('');
     }
   };
 
@@ -49,15 +49,15 @@ export const PhonebookItem = ({ contacts, onAddContact }) => {
         value={name}
         onChange={onInputChange}
       />
-      <label className="label">Number</label>
+      <label className="label">phone</label>
       <input
         placeholder="+380"
         className="input is-success"
-        type="number"
-        name="number"
+        type="tel"
+        name="phone"
         maxLength="20"
         required
-        value={number}
+        value={phone}
         onChange={onInputChange}
       />
       <button className="button is-primary" type="submit">

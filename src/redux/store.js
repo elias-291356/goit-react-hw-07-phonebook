@@ -3,7 +3,7 @@ import { phoneBookReducer } from "./phoneBookReducer";
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import {
   persistStore,
-  persistReducer,
+  // persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -11,22 +11,22 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+// import storage from 'redux-persist/lib/storage';
 
 export const rootReducer = combineReducers({
   phoneBook: phoneBookReducer,
 });
 
-const phonebookPersistConfig = {
-  key: 'phonebook',
-  storage,
-  whitelist: ['contacts', 'filter'] //   в локал стораж пойдет только то, что указано
-  // blacklist: ['filter'], в локал стораж пойдет все что не фильтр
-}
+// const phonebookPersistConfig = {
+//   key: 'phonebook',
+//   storage,
+// whitelist: ['contacts', 'filter'] //   в локал стораж пойдет только то, что указано
+// blacklist: ['filter'], в локал стораж пойдет все что не фильтр
+// }
 
 const store = configureStore({
   reducer: {
-    phoneBook: persistReducer(phonebookPersistConfig, phoneBookReducer)
+    phoneBook: (phoneBookReducer)
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

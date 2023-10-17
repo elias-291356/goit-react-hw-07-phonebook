@@ -1,27 +1,34 @@
 import 'bulma/css/bulma.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Filter } from './Filter/Filter';
 import { Contacts } from './Contacts/Contacts';
 import { PhonebookItem } from './PhonebookItem/PhonebookItem';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  setHandleAddContact,
-  setOnDeleteContact,
+  fetchDeleteContactsThunk,
+  fetchThunk,
+  fetchAddContactsThunk,
   setOnFilterContact,
 } from 'redux/phoneBookReducer';
 
 export const App = () => {
   const contacts = useSelector(state => state.phoneBook.contacts);
   const filter = useSelector(state => state.phoneBook.filter);
+  const isLoading = useSelector(state => state.phoneBook.isLoading);
+  const error = useSelector(state => state.phoneBook.error);
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(fetchThunk());
+  }, [dispatch]);
+
   const handleAddContact = newContact => {
-    dispatch(setHandleAddContact(newContact));
+    dispatch(fetchAddContactsThunk(newContact));
   };
 
-  const onDeleteContact = id => {
-    dispatch(setOnDeleteContact(id));
+  const onDeleteContact = contactId => {
+    dispatch(fetchDeleteContactsThunk(contactId));
   };
 
   const onFilterContact = event => {
@@ -32,7 +39,7 @@ export const App = () => {
   const filtered = contacts.filter(contact => {
     return (
       contact.name.toLowerCase().includes(filter.trim().toLowerCase()) ||
-      contact.number.includes(filter)
+      contact.phone.includes(filter)
     );
   });
 
