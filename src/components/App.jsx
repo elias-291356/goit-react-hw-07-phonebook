@@ -14,8 +14,8 @@ import {
 export const App = () => {
   const contacts = useSelector(state => state.phoneBook.contacts);
   const filter = useSelector(state => state.phoneBook.filter);
-  const isLoading = useSelector(state => state.phoneBook.isLoading);
-  const error = useSelector(state => state.phoneBook.error);
+  // const isLoading = useSelector(state => state.phoneBook.isLoading);
+  // const error = useSelector(state => state.phoneBook.error);
 
   const dispatch = useDispatch();
 
